@@ -28,7 +28,7 @@ import Sailfish.Silica 1.0
 
 BackgroundItem {
     id: delegate
-
+    property string pillColor: ''
     property string title: ''
     property int titleSize: Theme.fontSizeMedium
     property int titleWeight: Font.Normal
@@ -59,6 +59,15 @@ BackgroundItem {
     width: GridView.view.cellWidth
 //    width: (appWindow.orientation === Orientation.Portrait) ? (GridView.view.width / columnsPortrait) : (GridView.view.width / columnsLandscape)
     height: Theme.itemSizeLarge
+    Rectangle {
+        id: rect
+        radius: 3
+        width: parent.height*0.05
+        height: width
+        y: parent.height - height - Theme.paddingLarge
+        x: Theme.paddingLarge
+        color: pillColor
+    }
 
     Item {
         id: textureItem
