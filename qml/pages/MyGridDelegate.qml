@@ -30,6 +30,7 @@ BackgroundItem {
     id: delegate
     property string pillColor: ''
     property string title: ''
+    property bool fav: false
     property int titleSize: Theme.fontSizeMedium
     property int titleWeight: Font.Normal
     property string titleFontFamily: Theme.fontFamily
@@ -61,7 +62,7 @@ BackgroundItem {
     height: Theme.itemSizeLarge
     Rectangle {
         id: rect
-        radius: 3
+        radius: (fav ? 3 : 0)
         width: parent.height*0.05
         height: width
         y: parent.height - height - Theme.paddingLarge

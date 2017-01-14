@@ -44,7 +44,9 @@ DISTFILES += \
     qml/pages/jsonpath.js \
     qml/pages/Logic.js \
     qml/pages/ArticlesList.qml \
-    qml/pages/MyGridDelegate.qml
+    qml/pages/Station.qml \
+    qml/pages/MyGridDelegate.qml \
+    qml/pages/CmpDisplayElement.qml
 
 HEADERS +=
 

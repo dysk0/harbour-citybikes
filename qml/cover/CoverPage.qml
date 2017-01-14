@@ -33,14 +33,6 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
 
-    Image {
-        source: "banjaluka.svg";
-        fillMode: Image.PreserveAspectFit;
-        verticalAlignment: Image.AlignTop;
-        horizontalAlignment: Image.AlignLeft;
-        anchors.fill: parent;
-    }
-
     Label {
         id: label
         anchors.centerIn: parent

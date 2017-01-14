@@ -172,6 +172,7 @@ Page {
         delegate: MyGridDelegate {
             //width: parent.width
             title: name
+            fav: Logic.isReaded(id)
             subtitle: free_bikes+' / '+empty_slots
             pillColor: (free_bikes == 0 ? '#E33033' : (free_bikes/(free_bikes+empty_slots) < 0.25 ? '#FFB43F' : '#093'))
             height: width
@@ -181,9 +182,20 @@ Page {
             columnsLandscape: 4
 
             onClicked: {
-                console.debug(index)
-                console.debug(free_bikes/(free_bikes+empty_slots))
-                console.debug('bikes ' + free_bikes + "\t  slots: "+ empty_slots)
+                var data = {
+                    stationId: id,
+                    company: settings.get(0).company,
+                    city: settings.get(0).city,
+                    href: settings.get(0).href,
+                    name: name,
+                    free_bikes: free_bikes,
+                    empty_slots: empty_slots,
+                    latitude: latitude,
+                    longitude: longitude,
+                    timestamp: timestamp
+
+                }
+                pageStack.push(Qt.resolvedUrl("Station.qml"), data)
             }
         }
 

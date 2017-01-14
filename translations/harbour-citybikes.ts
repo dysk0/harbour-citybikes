@@ -9,6 +9,26 @@
         <extracomment>header title</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message id="Free Bike">
+        <location filename="../qml/pages/Station.qml" line="173"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Free Bikes">
+        <location filename="../qml/pages/Station.qml" line="173"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Empty slots">
+        <location filename="../qml/pages/Station.qml" line="180"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Far away">
+        <location filename="../qml/pages/Station.qml" line="189"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticlesList</name>
@@ -21,7 +41,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="47"/>
+        <location filename="../qml/cover/CoverPage.qml" line="39"/>
         <source>City Bikes</source>
         <translation type="unfinished"></translation>
     </message>

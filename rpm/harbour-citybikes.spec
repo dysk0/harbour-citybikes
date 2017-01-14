@@ -13,8 +13,8 @@ Name:       harbour-citybikes
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    City Bikes
-Version:    0.2.1
-Release:    3
+Version:    0.0.2
+Release:    2
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
