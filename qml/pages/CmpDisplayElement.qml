@@ -14,14 +14,14 @@ Item {
             right: parent.right
             leftMargin: Theme.paddingLarge
             rightMargin: Theme.paddingLarge
-            verticalCenter: parent.verticalCenter
+            //verticalCenter: parent.verticalCenter
         }
         width: parent.width
         Label {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
             color: Theme.highlightColor
-            font.pixelSize: Theme.fontSizeExtraLarge*2
+            font.pixelSize: Theme.fontSizeExtraLarge*1.2
             text: title
         }
     }
@@ -47,6 +47,7 @@ Item {
 
 
     Rectangle {
+        visible: false
         rotation: 45
         width: parent.width * 1.412136
         height: parent.height * 1.412136

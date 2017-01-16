@@ -38,22 +38,71 @@ Page {
     property string categoryDescription: ""
     property bool isLazyLoading: false
     property bool showHints: false
-    property real readedOpacity: 0.6
-    property variant readed: []
+    property string searchString
+    property variant conf: ({})
+    onSearchStringChanged: filteredModel.update()
+
+    WorkerScript {
+        id: myWorker
+        source: "../worker.js"
+        onMessage: {
+            console.log(messageObject.reply)
+            if (messageObject.reply == "modelUpdate"){
+                rawModel.update()
+            }
+
+            if (messageObject.error){
+
+            }
+        }
+    }
     function getConf(cnf) {
+        console.log("-------------getConf")
+        var m = cnf;
+        if (typeof cnf.favourites == "string"){
+            settings.get(0).favourites = cnf.favourites;
+            m.favourites = cnf.favourites.split(',');
+        }
+        conf = m;
+
+        Logic.conf = conf;
+
         console.log(JSON.stringify(cnf))
+        myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': conf})
         horizontalFlick.stop()
-        if (!cnf.href){
+        if (!cnf.href || cnf.href == ""){
             console.log("no previous conf!")
             indicator.running = false;
             horizontalFlick.direction = TouchInteraction.Left
             horizontalFlick.start()
             showHints = true;
         }
-
-
         settings.clear()
         settings.append(cnf)
+    }
+
+
+
+    function updateData() {
+        var m = conf;
+        m.refresh = (settings.get(0).refresh ? true : false);
+
+        if (settings.get(0).city){
+            m.city = settings.get(0).city;
+            categoryDescription = m.city;
+        }
+
+        if (settings.get(0).favourites) {
+            m.favourites = settings.get(0).favourites.split(',')
+        }
+        if (settings.get(0).href) {
+            m.href = settings.get(0).href
+        }
+
+        conf = m;
+        getConf(conf)
+
+
     }
 
     ListModel {
@@ -61,37 +110,63 @@ Page {
         ListElement {
             href: "/v2/networks/bicing"
             refresh: false
-            name: "Mjau"
+            name: ""
+            favourites: ''
+        }
+    }
+    ListModel {
+        id: rawModel
+        function update() {
+            filteredModel.update()
+        }
+    }
+    ListModel {
+        id: filteredModel
+        function update() {
+
+            var filteredData = [];
+            for (var index = 0; index < rawModel.count; index++) {
+                var item = rawModel.get(index);
+                if ((item.city+item.name).toLowerCase().indexOf(searchString) !== -1){
+                    filteredData.push(item)
+                }
+            }
+            var fav = [];
+            var unFav = [];
+            for (index = 0; index < filteredData.length; index++) {
+                item = filteredData[index];
+                if (filteredData[index].favourited)
+                    fav.push(filteredData[index])
+                else
+                    unFav.push(filteredData[index])
+            }
+            filteredData = fav.concat(unFav)
+
+            while (count > filteredData.length) {
+                remove(filteredData.length)
+            }
+            for (index = 0; index < filteredData.length; index++) {
+                if (index < count) {
+                    setProperty(index, "id", filteredData[index].id)
+                    setProperty(index, "empty_slots", filteredData[index].empty_slots)
+                    setProperty(index, "free_bikes", filteredData[index].free_bikes)
+                    setProperty(index, "latitude", filteredData[index].latitude)
+                    setProperty(index, "longitude", filteredData[index].longitude)
+                    setProperty(index, "name", filteredData[index].name)
+                    setProperty(index, "timestamp", filteredData[index].timestamp)
+                    setProperty(index, "favourited", filteredData[index].favourited)
+                } else {
+                    append(filteredData[index])
+                }
+            }
         }
     }
 
-    function updateData() {
-        console.log("CONFIG")
-        var source = ""
-
-        var _city = settings.get(0).city;
-        var _company= settings.get(0).company;
-        var _href = settings.get(0).href;
-
-
-        var _refresh = settings.get(0).refresh;
-        categoryDescription = settings.get(0).city;
-        if (_refresh) {
-            articles.model.clear();
-            settings.setProperty(0, "refresh", false);
-        }
-
-        if (settings.get(0).href !== "")
-            source  ='https://api.citybik.es'+_href;
-
-        articles.source = source;
-    }
 
     onStatusChanged: {
         if (status === PageStatus.Active) {
             pageStack.pushAttached(Qt.resolvedUrl("Categories.qml"), {"settings": settings})
             updateData()
-            //myWorker.sendMessage({ 'model': articles, 'action': 'fetch', 'category': settings.get(0).category, 'page': settings.get(0).page})
         }
     }
     Component.onCompleted: {
@@ -104,96 +179,130 @@ Page {
 
     BusyIndicator {
         id: indicator
-        running: articles.count == 0
+        running: rawModel.count == 0
         size: BusyIndicatorSize.Large
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
     }
+    Column {
+        id: headerContainer
+        width: firstPage.width
+        PageHeader {
+            title: categoryDescription
+            //: header title
+            //% City Bikes
+            description: qsTrId("City Bikes")
+        }
+        SearchField {
+            id: searchField
+            visible: false
+            width: parent.width
+
+            Binding {
+                target: firstPage
+                property: "searchString"
+                value: searchField.text.toLowerCase().trim()
+            }
+        }
+    }
+
     SilicaGridView {
-        visible: articles.count !== 0
+        visible: rawModel.count !== 0
         leftMargin: Theme.paddingLarge
         id: listView
         width: parent.width;
         cellWidth: firstPage.width / (isLandscape ? 4 : 2)
         cellHeight: cellWidth
         anchors.fill: parent
+        header: Item {
+            id: header
+            width: headerContainer.width
+            height: headerContainer.height
+            Component.onCompleted: headerContainer.parent = header
+        }
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
+                //% About
+                text: qsTrId("About")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"), data)
+                }
+            }
+            MenuItem {
                 //: Pull menu item for list reload
                 //% Refresh
-                text: "Remove default location"
+                text: qsTrId("Remove default location")
                 onClicked: {
-                    Logic.saveConfig("conf", JSON.stringify({}));
-                    articles.model.clear()
-                    settings.clear();
-                    getConf()
+                    showHints = true;
+                    conf = ({})
+                    settings.setProperty(0, "city",'');
+                    settings.setProperty(0, "href",'');
+                    settings.setProperty(0, "favourites",' ');
+                    //getConf({})
+                    filteredModel.clear()
+                    rawModel.clear()
                     updateData();
                 }
             }
             MenuItem {
-                text: "Mark all unread"
+                //: Pull menu item for list Search
+                //% Search
+                text: (searchField.visible ? qsTrId("Hide search") : qsTrId("Show search"))
+                onClicked: {
+                    searchField.visible = !searchField.visible
+                    if (!searchField.visible){
+                        searchString = ""
+                    }
+                }
+            }
 
-                onClicked: {
-                    Logic.clearReaded();
-                    articles.model.clear()
-                    settings.setProperty(0, "refresh", false);
-                    settings.setProperty(0, "page", 1);
-                    updateData();
-                }
-            }
-            MenuItem {
-                //: Pull menu item for list reload
-                //% Refresh
-                text: "Reload"
-                onClicked: {
-                    articles.model.clear()
-                    settings.setProperty(0, "refresh", false);
-                    settings.setProperty(0, "page", 1);
-                    updateData();
-                }
-            }
         }
-        header: PageHeader {
-            title: categoryDescription
-            //: header title
-            //% City Bikes
-            description: qsTrId("City Bikes")
-        }
-        JSONListModel {
-            id: articles
-            source: ""
-            query: "$.network.stations[*]"
-        }
-        model: articles.model
+
+        model: filteredModel
         //section.delegate: sectionDelegate
+        ViewPlaceholder {
+            enabled: searchField.visible && filteredModel.count == 0
+            text: qsTrId("No results found!")
+            hintText: qsTrId("Please change your inquiry")
+        }
 
 
         delegate: MyGridDelegate {
             //width: parent.width
-            title: name
-            fav: Logic.isReaded(id)
-            subtitle: free_bikes+' / '+empty_slots
-            pillColor: (free_bikes == 0 ? '#E33033' : (free_bikes/(free_bikes+empty_slots) < 0.25 ? '#FFB43F' : '#093'))
+            title: Theme.highlightText(model.name, searchString, Theme.highlightColor)
+            titleColor: searchString.length > 0 ? (highlighted ? Theme.secondaryHighlightColor : Theme.primaryColor)
+                                                : (highlighted ? Theme.highlightColor : Theme.primaryColor)
+            fav: favourited
+            _free_bike: {
+                return ( typeof free_bikes != "undefined" ? free_bikes : 0)
+            }
+            _empty_slots: {
+                return ( typeof empty_slots != "undefined" ? empty_slots : 0)
+            }
+            subtitle: _free_bike + ' / ' + _empty_slots
+            pillColor: {
+                return (_free_bike == 0 ? '#E33033' : (_free_bike/(_free_bike+_empty_slots) < 0.25 ? '#FFB43F' : '#093'))
+            }
             height: width
             texture: true
-            //    width: (appWindow.orientation === Orientation.Portrait) ? (GridView.view.width / columnsPortrait) : (GridView.view.width / columnsLandscape)
             columnsPortrait: 2
             columnsLandscape: 4
 
             onClicked: {
+                settings.setProperty(0, "favourites", (conf.favourites ? conf.favourites.join(',') : ''));
                 var data = {
                     stationId: id,
                     company: settings.get(0).company,
                     city: settings.get(0).city,
                     href: settings.get(0).href,
                     name: name,
-                    free_bikes: free_bikes,
-                    empty_slots: empty_slots,
+                    free_bikes: _free_bike,
+                    empty_slots: _empty_slots,
                     latitude: latitude,
                     longitude: longitude,
-                    timestamp: timestamp
-
+                    timestamp: timestamp,
+                    settings: settings
                 }
                 pageStack.push(Qt.resolvedUrl("Station.qml"), data)
             }
@@ -211,13 +320,13 @@ Page {
     InteractionHintLabel {
         id: horizontalFlick2
         anchors.bottom: parent.bottom
-        visible: (articles.count == 0) && showHints
+        visible: (rawModel.count == 0) && showHints
         Behavior on opacity { FadeAnimation { duration: 1000 } }
         text: "Flick left to select default location"
     }
     TouchInteractionHint {
         id: horizontalFlick
-        visible: (articles.count == 0) && showHints
+        visible: (rawModel.count == 0) && showHints
         loops: Animation.Infinite
         anchors.verticalCenter: parent.verticalCenter
     }

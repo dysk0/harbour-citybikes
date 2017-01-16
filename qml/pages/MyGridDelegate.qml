@@ -28,7 +28,9 @@ import Sailfish.Silica 1.0
 
 BackgroundItem {
     id: delegate
-    property string pillColor: ''
+    property int _free_bike: 0
+    property int _empty_slots: 0
+    property string pillColor: 'red'
     property string title: ''
     property bool fav: false
     property int titleSize: Theme.fontSizeMedium
@@ -60,15 +62,7 @@ BackgroundItem {
     width: GridView.view.cellWidth
 //    width: (appWindow.orientation === Orientation.Portrait) ? (GridView.view.width / columnsPortrait) : (GridView.view.width / columnsLandscape)
     height: Theme.itemSizeLarge
-    Rectangle {
-        id: rect
-        radius: (fav ? 3 : 0)
-        width: parent.height*0.05
-        height: width
-        y: parent.height - height - Theme.paddingLarge
-        x: Theme.paddingLarge
-        color: pillColor
-    }
+
 
     Item {
         id: textureItem
@@ -84,29 +78,40 @@ BackgroundItem {
 
             gradient: Gradient {
                 GradientStop { position: 0.0; color: Theme.rgba(Theme.primaryColor, 0) }
-                GradientStop { position: 1.0; color: Theme.rgba(Theme.primaryColor, 0.05) }
+                GradientStop { position: 1.0; color: Theme.rgba((fav ? Theme.highlightColor : Theme.primaryColor), (fav ? 0.25 : 0.05)) }
             }
         }
     }
-
+    Rectangle {
+        id: rect
+        radius: 3
+        width: parent.height*0.05*(fav ? 2 : 1)
+        height: parent.height*0.05
+        y: parent.height - height - Theme.paddingLarge
+        x: Theme.paddingLarge
+        color: pillColor
+    }
     Image {
         id: delegateImage
         anchors {
             left: parent.left
+            top: parent.top
             leftMargin: Theme.paddingLarge
-            verticalCenter: parent.verticalCenter
+            topMargin: Theme.paddingLarge
         }
-        source: iconSource
-        fillMode: Image.PreserveAspectFit
-        width: Theme.itemSizeLarge
-        height: Theme.itemSizeLarge
-        visible: iconSource
+        source: "image://theme/icon-s-favorite?" + (pressed
+                                                             ? Theme.highlightColor
+                                                             : Theme.secondaryHighlightColor)
+//        fillMode: Image.PreserveAspectFit
+//        width: Theme.itemSizeExtraSmall
+//        height: Theme.itemSizeExtraSmall
+        visible: false //fav
     }
 
     Column {
         id: delegateColumn
         anchors {
-            left: delegateImage.visible ? delegateImage.right : parent.left
+            left: parent.left
             leftMargin: Theme.paddingLarge
             right: parent.right
             rightMargin: Theme.paddingLarge
@@ -119,6 +124,7 @@ BackgroundItem {
             id: delegateTitleLabel
             font.weight: titleWeight
             font.pixelSize: titleSize
+            textFormat: Text.StyledText
             color: titleColor
             width: parent.width
             horizontalAlignment: Text.AlignHCenter

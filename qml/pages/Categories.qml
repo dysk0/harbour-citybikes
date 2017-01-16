@@ -157,8 +157,8 @@ Page {
 
             ViewPlaceholder {
                 enabled: listModel.count == 0
-                text: "Please wait..."
-                hintText: "Loading networks to display"
+                text: rawModel.count==0 ? qsTrId("Please wait...") : qsTrId("No results found!")
+                hintText: rawModel.count==0 ? qsTrId("Loading networks to display") : qsTrId("Please change your inquiry")
             }
 
             section {

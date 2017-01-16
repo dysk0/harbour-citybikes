@@ -38,15 +38,15 @@ CONFIG += sailfishapp_i18n
 #TRANSLATIONS += translations/harbour-citybikes-de.ts
 
 DISTFILES += \
-    qml/pages/Article.qml \
     qml/pages/Categories.qml \
     qml/pages/JSONListModel.qml \
     qml/pages/jsonpath.js \
     qml/pages/Logic.js \
-    qml/pages/ArticlesList.qml \
     qml/pages/Station.qml \
     qml/pages/MyGridDelegate.qml \
-    qml/pages/CmpDisplayElement.qml
+    qml/pages/CmpDisplayElement.qml \
+    qml/worker.js \
+    qml/pages/AboutPage.qml
 
 HEADERS +=
 

@@ -37,10 +37,8 @@ import Sailfish.Silica 1.0
 import QtWebKit 3.0
 import QtPositioning 5.2
 
-import "Logic.js" as Logic
-
 Page {
-    id: pageStation
+    id: firstPage
     property string stationId: ''
     property string company: ''
     property string city: ''
@@ -52,6 +50,24 @@ Page {
     property double timestamp
     property string name: ''
     property string extra: ''
+    property variant conf: ({})
+    property variant favourites;
+    property ListModel settings;
+
+    Component.onCompleted: {
+        console.log("mjau mjua mjau "+settings.get(0).favourites)
+        console.log(settings.get(0).favourites)
+        favourites = [];
+        if (settings.get(0).favourites){
+            favourites = settings.get(0).favourites.split(',');
+            console.log("no favs at all.")
+        }
+    }
+
+
+    function getConf(cnf) {
+
+    }
 
 
     allowedOrientations: Orientation.Portrait | Orientation.Landscape
@@ -64,7 +80,7 @@ Page {
         onPositionChanged:  {
             var currentPosition = positionSource.position.coordinate
             var _distance = currentPosition.distanceTo(fromCoordinate)
-            console.log("distance:" + _distance)
+            //console.log("distance:" + _distance)
             if (_distance < 1000){
                 _distance = _distance + ' m'
             } else {
@@ -77,10 +93,10 @@ Page {
     DockedPanel {
         id: controlPanel
 
-        width: pageStation.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
-        height: pageStation.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
+        width: firstPage.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
+        height: firstPage.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
 
-        dock: pageStation.isPortrait ? Dock.Top : Dock.Left
+        dock: firstPage.isPortrait ? Dock.Top : Dock.Left
 
         Flow {
             width: isPortrait ? undefined : Theme.itemSizeExtraLarge
@@ -103,7 +119,7 @@ Page {
         id: drawer
 
         anchors.fill: parent
-        dock: pageStation.isPortrait ? Dock.Top : Dock.Left
+        dock: firstPage.isPortrait ? Dock.Top : Dock.Left
 
         background: WebView {
             id: wv
@@ -133,10 +149,10 @@ Page {
         SilicaFlickable {
             anchors {
                 fill: parent
-                leftMargin: pageStation.isPortrait ? 0 : controlPanel.visibleSize
-                topMargin: pageStation.isPortrait ? controlPanel.visibleSize : 0
-                rightMargin: pageStation.isPortrait ? 0 : progressPanel.visibleSize
-                bottomMargin: pageStation.isPortrait ? progressPanel.visibleSize : 0
+                leftMargin: firstPage.isPortrait ? 0 : controlPanel.visibleSize
+                topMargin: firstPage.isPortrait ? controlPanel.visibleSize : 0
+                rightMargin: firstPage.isPortrait ? 0 : progressPanel.visibleSize
+                bottomMargin: firstPage.isPortrait ? progressPanel.visibleSize : 0
             }
 
             contentHeight: column.height + Theme.paddingLarge
@@ -148,8 +164,33 @@ Page {
                 anchors.fill: parent
                 onClicked: drawer.open = !drawer.open
             }
-
-
+            IconButton {
+                id: favIcon
+                visible: drawer.open
+                x: Theme.paddingLarge
+                y: Theme.paddingLarge
+                property bool status: (favourites && favourites.indexOf(stationId) > -1 ? true : false)
+                icon.source: (status ?
+                                  "image://theme/icon-m-favorite-selected?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
+                                    :
+                                  "image://theme/icon-m-favorite?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
+                              )
+                onClicked: {
+                    status = !status;
+                    var _favourites = favourites;
+                    if (_favourites && _favourites.indexOf(stationId) > -1){
+                        _favourites.splice(_favourites.indexOf(stationId), 1);
+                        console.log("remove");
+                    } else {
+                        _favourites.push(stationId)
+                        console.log("add");
+                    }
+                    favourites = _favourites;
+                    settings.setProperty(0, "favourites", _favourites.join(','));
+                    settings.setProperty(0, "refresh", true);
+                    console.log(JSON.stringify(favourites))
+                }
+            }
             Column {
                 id: column
                 spacing: Theme.paddingLarge
@@ -163,19 +204,19 @@ Page {
                 Row {
                     spacing: Theme.paddingLarge
                     width: parent.width
-                    height: parent.width/2
+                    height: Theme.itemSizeExtraLarge
 
                     CmpDisplayElement {
                         id: smComp
-                        width: (parent.width-2*Theme.paddingLarge)/2
-                        height: width
+                        width: parent.width/2-Theme.paddingLarge/2
+                        height: Theme.itemSizeExtraLarge
                         title: free_bikes
                         description: free_bikes == 1 ? qsTrId("Free Bike") : qsTrId("Free Bikes")
                     }
 
                     CmpDisplayElement {
                         width: smComp.width
-                        height: width
+                        height: smComp.height
                         title: empty_slots
                         description: qsTrId("Empty slots")
                     }
@@ -184,7 +225,7 @@ Page {
                 CmpDisplayElement {
                     id: distance
                     width: parent.width
-                    height: smComp.width
+                    height: smComp.height
                     title:  '∞'
                     description: qsTrId("Far away")
                 }
@@ -211,9 +252,9 @@ Page {
                 }
             }
 
+
         }
         Component.onCompleted: {
-            //Logic.initialize();
             //drawer.open = true
         }
 
@@ -222,10 +263,10 @@ Page {
     DockedPanel {
         id: progressPanel
 
-        width: pageStation.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
-        height: pageStation.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
+        width: firstPage.isPortrait ? parent.width : Theme.itemSizeExtraLarge + Theme.paddingLarge
+        height: firstPage.isPortrait ? Theme.itemSizeExtraLarge + Theme.paddingLarge : parent.height
 
-        dock: pageStation.isPortrait ? Dock.Bottom : Dock.Right
+        dock: firstPage.isPortrait ? Dock.Bottom : Dock.Right
 
         ProgressCircle {
             id: progressCircle
