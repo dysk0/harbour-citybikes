@@ -1,9 +1,11 @@
 .import QtQuick.LocalStorage 2.0 as LS
+.pragma library
+
 var db = LS.LocalStorage.openDatabaseSync("dyskoctbikes", "", "dyskoctbikes", 100000);
 var conf = {
-    favourites: [],
-    showSearch: false
+    favourites: []
 };
+
 function initialize() {
     console.log("db.version: "+db.version);
     if(db.version === '') {
@@ -39,11 +41,30 @@ function initialize() {
             //    favouriteItems = JSON.parse(rs.rows.item(i).value);
             if ( rs.rows.item(i).key === "conf" && rs.rows.item(i).value !== null){
                 conf= JSON.parse(rs.rows.item(i).value);
+                if (!conf.favourites)
+                    conf.favourites = [];
             }
         }
-        console.log("FAV: "+JSON.stringify(conf));
-        firstPage.getConf(conf)
+        showLog()
+        //firstPage.getConf(conf)
     });
+}
+
+function isFavourite(id){
+    return (conf.favourites && conf.favourites.indexOf(id) > -1 ? true : false)
+}
+
+function toggleFavourite(id) {
+    showLog()
+
+    if (isFavourite(id)){
+        conf.favourites.splice(conf.favourites.indexOf(id), 1);
+        console.log("remove");
+    } else {
+        conf.favourites.push(id)
+        console.log("add");
+    }
+    showLog()
 }
 
 function test() {
@@ -56,16 +77,6 @@ function setConfig(c) {
     conf = c;
     console.log('setConfig '+JSON.stringify(conf))
 }
-
-function isFavourite(id) {
-    if (conf.favourites && conf.favourites.indexOf(id) > -1){
-        return true;
-    } else {
-        return false;
-    }
-}
-
-
 
 function saveData() {
     db.transaction(function(tx) {
@@ -82,4 +93,6 @@ function saveConfig(key, value) {
         console.log("Saving 2 DB... "+key+"\n"+value+"\n"+JSON.stringify(rs))
     });
 }
-
+function showLog(){
+    console.log("CONF: "+JSON.stringify(conf));
+}

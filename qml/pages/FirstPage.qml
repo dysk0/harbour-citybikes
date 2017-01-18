@@ -35,11 +35,12 @@ import "Logic.js" as Logic
 
 Page {
     id: firstPage
-    property string categoryDescription: ""
+    property string pageTitle: ""
+    property string pageDescription: ""
+
     property bool isLazyLoading: false
     property bool showHints: false
     property string searchString
-    property variant conf: ({})
     onSearchStringChanged: filteredModel.update()
 
     WorkerScript {
@@ -56,21 +57,14 @@ Page {
             }
         }
     }
-    function getConf(cnf) {
+    function getConf() {
         console.log("-------------getConf")
-        var m = cnf;
-        if (typeof cnf.favourites == "string"){
-            settings.get(0).favourites = cnf.favourites;
-            m.favourites = cnf.favourites.split(',');
-        }
-        conf = m;
+        pageTitle = Logic.conf.city;
+        pageDescription = Logic.conf.company;
 
-        Logic.conf = conf;
-
-        console.log(JSON.stringify(cnf))
-        myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': conf})
+        myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': Logic.conf})
         horizontalFlick.stop()
-        if (!cnf.href || cnf.href == ""){
+        if (!Logic.conf.href || Logic.conf.href == ""){
             console.log("no previous conf!")
             indicator.running = false;
             horizontalFlick.direction = TouchInteraction.Left
@@ -78,31 +72,21 @@ Page {
             showHints = true;
         }
         settings.clear()
-        settings.append(cnf)
+        settings.append(Logic.conf)
     }
 
 
 
     function updateData() {
-        var m = conf;
-        m.refresh = (settings.get(0).refresh ? true : false);
-
+        Logic.conf.refresh = (settings.get(0).refresh ? true : false);
         if (settings.get(0).city){
-            m.city = settings.get(0).city;
-            categoryDescription = m.city;
-        }
-
-        if (settings.get(0).favourites) {
-            m.favourites = settings.get(0).favourites.split(',')
+            Logic.conf.city = settings.get(0).city;
+            Logic.conf.company = settings.get(0).company;
         }
         if (settings.get(0).href) {
-            m.href = settings.get(0).href
+            Logic.conf.href = settings.get(0).href
         }
-
-        conf = m;
-        getConf(conf)
-
-
+        getConf()
     }
 
     ListModel {
@@ -188,10 +172,8 @@ Page {
         id: headerContainer
         width: firstPage.width
         PageHeader {
-            title: categoryDescription
-            //: header title
-            //% City Bikes
-            description: qsTrId("City Bikes")
+            title: pageTitle
+            description: pageDescription
         }
         SearchField {
             id: searchField
@@ -235,7 +217,7 @@ Page {
                 text: qsTrId("Remove default location")
                 onClicked: {
                     showHints = true;
-                    conf = ({})
+                    Logic.conf = {}
                     settings.setProperty(0, "city",'');
                     settings.setProperty(0, "href",'');
                     settings.setProperty(0, "favourites",' ');
@@ -290,7 +272,6 @@ Page {
             columnsLandscape: 4
 
             onClicked: {
-                settings.setProperty(0, "favourites", (conf.favourites ? conf.favourites.join(',') : ''));
                 var data = {
                     stationId: id,
                     company: settings.get(0).company,

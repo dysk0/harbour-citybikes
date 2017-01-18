@@ -30,13 +30,15 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../pages/Logic.js" as Logic
 
 CoverBackground {
 
     Label {
         id: label
         anchors.centerIn: parent
-        text: qsTr("City Bikes")
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        text: JSON.stringify(Logic.conf) //qsTr("City Bikes")
     }
 }
 

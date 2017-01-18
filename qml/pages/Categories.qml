@@ -213,16 +213,16 @@ Page {
                     if (settings.get(0).href !== model.href){
                         settings.setProperty(0, "refresh", true);
                         settings.setProperty(0, "href", model.href);
-                        settings.setProperty(0, "name", model.name);
                         settings.setProperty(0, "city", model.city);
+                        settings.setProperty(0, "company", model.name);
 
-                        Logic.saveConfig("conf", JSON.stringify({
-                                                                    "city": model.city,
-                                                                    "company": model.company,
-                                                                    "href": model.href,
-                                                                    "name": model.name,
-                                                                    "section": model.section
-                                                                }));
+                        Logic.conf = {
+                            "refresh": true,
+                            "city": model.city,
+                            "company": model.name,
+                            "href": model.href,
+                            "favourites": []
+                        }
                     }
                     pageStack.navigateBack()
                 }
@@ -298,7 +298,7 @@ Page {
                                 'section' : item.location.country,
                                 'company' : Array.isArray(item.company) ? item.company.join(", ") : item.company
                             }
-                            //console.log(_item);
+                            console.log(_item);
                             if (!filteredData.hasOwnProperty(_item.section)){
                                 filteredData[_item.section] = [];
                             }

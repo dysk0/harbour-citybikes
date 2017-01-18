@@ -36,13 +36,10 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtWebKit 3.0
 import QtPositioning 5.2
-
+import "Logic.js" as Logic
 Page {
     id: firstPage
     property string stationId: ''
-    property string company: ''
-    property string city: ''
-    property string href: ''
     property int free_bikes: 0
     property int empty_slots: 0
     property double latitude
@@ -50,7 +47,7 @@ Page {
     property double timestamp
     property string name: ''
     property string extra: ''
-    property variant conf: ({})
+    property string city: ''
     property variant favourites;
     property ListModel settings;
 
@@ -169,7 +166,7 @@ Page {
                 visible: drawer.open
                 x: Theme.paddingLarge
                 y: Theme.paddingLarge
-                property bool status: (favourites && favourites.indexOf(stationId) > -1 ? true : false)
+                property bool status: Logic.isFavourite(stationId)
                 icon.source: (status ?
                                   "image://theme/icon-m-favorite-selected?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
                                     :
@@ -177,18 +174,7 @@ Page {
                               )
                 onClicked: {
                     status = !status;
-                    var _favourites = favourites;
-                    if (_favourites && _favourites.indexOf(stationId) > -1){
-                        _favourites.splice(_favourites.indexOf(stationId), 1);
-                        console.log("remove");
-                    } else {
-                        _favourites.push(stationId)
-                        console.log("add");
-                    }
-                    favourites = _favourites;
-                    settings.setProperty(0, "favourites", _favourites.join(','));
-                    settings.setProperty(0, "refresh", true);
-                    console.log(JSON.stringify(favourites))
+                    Logic.toggleFavourite(stationId)
                 }
             }
             Column {
