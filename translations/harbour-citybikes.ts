@@ -25,26 +25,6 @@
         <source></source>
         <translation type="unfinished"></translation>
     </message>
-    <message id="Free Bike">
-        <location filename="../qml/pages/Station.qml" line="200"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="Free Bikes">
-        <location filename="../qml/pages/Station.qml" line="200"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="Empty slots">
-        <location filename="../qml/pages/Station.qml" line="207"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message id="Far away">
-        <location filename="../qml/pages/Station.qml" line="216"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
     <message id="Please wait...">
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source></source>
@@ -64,6 +44,26 @@
     </message>
     <message id="Loading networks to display">
         <location filename="../qml/pages/Categories.qml" line="161"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Free Bike">
+        <location filename="../qml/pages/Station.qml" line="195"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Free Bikes">
+        <location filename="../qml/pages/Station.qml" line="195"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Empty slots">
+        <location filename="../qml/pages/Station.qml" line="202"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message id="Far away">
+        <location filename="../qml/pages/Station.qml" line="211"/>
         <source></source>
         <translation type="unfinished"></translation>
     </message>

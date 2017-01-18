@@ -35,7 +35,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtWebKit 3.0
-import QtPositioning 5.2
+import QtPositioning 5.0
+import QtLocation 5.0
+
 import "Logic.js" as Logic
 Page {
     id: firstPage
@@ -48,17 +50,10 @@ Page {
     property string name: ''
     property string extra: ''
     property string city: ''
-    property variant favourites;
     property ListModel settings;
 
     Component.onCompleted: {
-        console.log("mjau mjua mjau "+settings.get(0).favourites)
-        console.log(settings.get(0).favourites)
-        favourites = [];
-        if (settings.get(0).favourites){
-            favourites = settings.get(0).favourites.split(',');
-            console.log("no favs at all.")
-        }
+
     }
 
 
@@ -118,29 +113,29 @@ Page {
         anchors.fill: parent
         dock: firstPage.isPortrait ? Dock.Top : Dock.Left
 
-        background: WebView {
-            id: wv
+        background: Map {
+            id: map
             anchors.fill: parent
-            url: 'http://api.grave-design.com/citybike.php?latitude='+latitude+'&longitude='+longitude
-            x: 0
-            y: 0
-            smooth: false
-
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
+            plugin : Plugin {
+                id: plugin
+                allowExperimental: true
+                preferred: ["nokia", "osm"]
+                required.mapping: Plugin.AnyMappingFeatures
+                required.geocoding: Plugin.AnyGeocodingFeatures
+                parameters: [
+                    PluginParameter { name: "app_id"; value: "yZsDfXKfb8SGn0pWvAcO" },
+                    PluginParameter { name: "token"; value: "9baoOsnPGb1s-BSbQzQ_JQ" },
+                    PluginParameter { name: "proxy"; value: "system"}
+                ]
+                //
+                //center: QtLocation.coordinate(longitude, latitude)
             }
-            onLoadingChanged: {
-                if (loadRequest.status == WebView.LoadSucceededStatus)
-                drawer.open = true
-            }
-
-            Component.onCompleted: {
-
-
-            }
+            zoomLevel: 6
+            center {
+                    // The Qt Company in Oslo
+                    latitude: latitude
+                    longitude: longitude
+                }
         }
 
         SilicaFlickable {
