@@ -36,8 +36,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtWebKit 3.0
 import QtPositioning 5.2
-//import QtLocation 5.0
-
 import "Logic.js" as Logic
 Page {
     id: firstPage
@@ -50,10 +48,17 @@ Page {
     property string name: ''
     property string extra: ''
     property string city: ''
+    property variant favourites;
     property ListModel settings;
 
     Component.onCompleted: {
-
+        console.log("mjau mjua mjau "+settings.get(0).favourites)
+        console.log(settings.get(0).favourites)
+        favourites = [];
+        if (settings.get(0).favourites){
+            favourites = settings.get(0).favourites.split(',');
+            console.log("no favs at all.")
+        }
     }
 
 
@@ -63,10 +68,7 @@ Page {
 
 
     allowedOrientations: Orientation.Portrait | Orientation.Landscape
-    Location {
-        id: currentPosition
-        coordinate: QtPositioning.coordinate(57.74169,12.15127 )
-    }
+
     PositionSource {
         id: positionSource
         active: true
@@ -81,7 +83,6 @@ Page {
             } else {
                 _distance = Math.round(_distance/1000) + ' km'
             }
-            map.toCoordinate(positionSource.position.coordinate)
             distance.title = _distance;
         }
     }
@@ -117,44 +118,29 @@ Page {
         anchors.fill: parent
         dock: firstPage.isPortrait ? Dock.Top : Dock.Left
 
-        background: Map {
-            id: map
+        background: WebView {
+            id: wv
             anchors.fill: parent
-            plugin : Plugin {
-                id: plugin
-                allowExperimental: true
-                preferred: ["nokia", "osm"]
-                required.mapping: Plugin.AnyMappingFeatures
-                required.geocoding: Plugin.AnyGeocodingFeatures
-                parameters: [
-                    /*PluginParameter { name: "app_id"; value: "yZsDfXKfb8SGn0pWvAcO" },
-                    PluginParameter { name: "token"; value: "9baoOsnPGb1s-BSbQzQ_JQ" },
-                    PluginParameter { name: "proxy"; value: "system"}*/
-                ]
+            url: 'http://api.grave-design.com/citybike.php?latitude='+latitude+'&longitude='+longitude
+            x: 0
+            y: 0
+            smooth: false
+
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
+                right: parent.right
+            }
+            onLoadingChanged: {
+                if (loadRequest.status == WebView.LoadSucceededStatus)
+                drawer.open = true
             }
 
+            Component.onCompleted: {
 
-            gesture.enabled: true
-            center: QtPositioning.coordinate(longitude, latitude)
-            zoomLevel: 6
-            //center: currentPosition.coordinate
-            MapCircle {
-                id: positionAccuracyIndicator
-                color: "#40FF0000"
-                border.color: Qt.darker(color);
-                border.width: 3
-                opacity: 1.0
-                center: currentPosition.coordinate
 
             }
-
-            HereIndicator {
-                id: hereIndicator
-                coordinate: positionAccuracyIndicator.center
-            }
-
-            
-
         }
 
         SilicaFlickable {
@@ -183,7 +169,7 @@ Page {
                 property bool status: Logic.isFavourite(stationId)
                 icon.source: (status ?
                                   "image://theme/icon-m-favorite-selected?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
-                                :
+                                    :
                                   "image://theme/icon-m-favorite?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
                               )
                 onClicked: {

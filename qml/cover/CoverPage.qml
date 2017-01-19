@@ -33,13 +33,110 @@ import Sailfish.Silica 1.0
 import "../pages/Logic.js" as Logic
 
 CoverBackground {
+    WorkerScript {
+        id: myWorker
+        source: "../worker.js"
+        onMessage: {
+            console.log(messageObject.reply)
+            if (messageObject.reply == "modelUpdate"){
+                rawModel.update()
+            }
 
-    Label {
-        id: label
-        anchors.centerIn: parent
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        text: JSON.stringify(Logic.conf) //qsTr("City Bikes")
+            if (messageObject.error){
+
+            }
+        }
+    }
+
+    ListModel {
+        id: rawModel
+        function update() {
+            filteredModel.update()
+        }
+    }
+    ListModel {
+        id: filteredModel
+        function update() {
+
+            var filteredData = [];
+            for (var index = 0; index < rawModel.count; index++) {
+                var item = rawModel.get(index);
+                if (item.favourited){
+                    filteredData.push(item)
+                }
+            }
+
+            while (count > filteredData.length) {
+                remove(filteredData.length)
+            }
+            for (index = 0; index < filteredData.length; index++) {
+                if (index < count) {
+                    setProperty(index, "id", filteredData[index].id)
+                    setProperty(index, "name", filteredData[index].name)
+                    setProperty(index, "empty_slots", filteredData[index].empty_slots)
+                    setProperty(index, "free_bikes", filteredData[index].free_bikes)
+                } else {
+                    append(filteredData[index])
+                }
+            }
+        }
+    }
+
+    SilicaListView {
+        model: filteredModel
+        anchors{
+            fill: parent
+            topMargin: Theme.paddingLarge
+            bottomMargin: Theme.paddingLarge
+            leftMargin: Theme.paddingSmall
+            rightMargin: Theme.paddingLarge
+        }
+        ViewPlaceholder {
+            enabled: rawModel.count > 0 && filteredModel.count == 0
+            text: qsTrId("No favourites")
+            hintText: qsTrId("Please change your inquiry")
+        }
+        delegate: Item {
+            width: parent.width
+            height: Theme.itemSizeSmall
+            Rectangle {
+                id: rect
+                radius: 2
+                width: 4
+                height: parent.height-4
+                y: 2
+                color: (free_bikes == 0 ? '#E33033' : (free_bikes/(free_bikes+empty_slots) < 0.25 ? '#FFB43F' : '#093'))
+            }
+            Column {
+                width: parent.width
+                anchors {
+                    left: rect.right + Theme.paddingSmall
+                    verticalCenter: parent.verticalCenter
+                }
+
+                Label {
+                    id: lbl
+                    x: Theme.paddingLarge
+                    text: name
+                    font.pixelSize: Theme.fontSizeSmall
+                    width: parent.width - Theme.paddingLarge
+                    color: Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                }
+                Label {
+                    x: lbl.x
+
+                    text: free_bikes +' / '+ empty_slots
+                    font.pixelSize: Theme.fontSizeExtraSmall
+                    color: Theme.highlightColor
+                    truncationMode: TruncationMode.Fade
+                }
+            }
+        }
+    }
+    onStatusChanged: {
+        if (status === PageStatus.Active) {
+            myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': Logic.conf})
+        }
     }
 }
-
-

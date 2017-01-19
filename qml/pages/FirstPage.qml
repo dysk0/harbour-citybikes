@@ -83,7 +83,7 @@ Page {
             Logic.conf.city = settings.get(0).city;
             Logic.conf.company = settings.get(0).company;
         }
-        if (settings.get(0).href) {
+        if (settings.get(0).href !== '') {
             Logic.conf.href = settings.get(0).href
         }
         getConf()
@@ -92,7 +92,7 @@ Page {
     ListModel {
         id: settings
         ListElement {
-            href: "/v2/networks/bicing"
+            href: ""
             refresh: false
             name: ""
             favourites: ''
@@ -205,13 +205,6 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
-                //% About
-                text: qsTrId("About")
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"), data)
-                }
-            }
-            MenuItem {
                 //: Pull menu item for list reload
                 //% Refresh
                 text: qsTrId("Remove default location")
@@ -227,6 +220,22 @@ Page {
                     updateData();
                 }
             }
+            MenuItem {
+                //% About
+                text: qsTrId("About")
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"), data)
+                }
+            }
+
+            MenuItem {
+                //% Refresh
+                text: qsTrId("Refresh")
+                onClicked: {
+                    getConf()
+                }
+            }
+
             MenuItem {
                 //: Pull menu item for list Search
                 //% Search
