@@ -63,7 +63,10 @@ Page {
 
 
     allowedOrientations: Orientation.Portrait | Orientation.Landscape
-
+    Location {
+        id: currentPosition
+        coordinate: QtPositioning.coordinate(57.74169,12.15127 )
+    }
     PositionSource {
         id: positionSource
         active: true
@@ -130,12 +133,23 @@ Page {
                 //
                 //center: QtLocation.coordinate(longitude, latitude)
             }
-            zoomLevel: 6
-            center {
-                    // The Qt Company in Oslo
-                    latitude: latitude
-                    longitude: longitude
-                }
+
+            gesture.enabled: true
+            center: currentPosition.coordinate
+            MapCircle {
+                id: positionAccuracyIndicator
+                color: "#40FF0000"
+                border.color: Qt.darker(color);
+                border.width: 3
+                opacity: 1.0
+                center: currentPosition.coordinate
+
+            }
+
+            HereIndicator {
+                id: hereIndicator
+                coordinate: positionAccuracyIndicator.center
+            }
         }
 
         SilicaFlickable {
@@ -164,7 +178,7 @@ Page {
                 property bool status: Logic.isFavourite(stationId)
                 icon.source: (status ?
                                   "image://theme/icon-m-favorite-selected?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
-                                    :
+                                :
                                   "image://theme/icon-m-favorite?" + (pressed ? Theme.primaryColor : Theme.secondaryColor)
                               )
                 onClicked: {
