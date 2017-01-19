@@ -35,8 +35,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtWebKit 3.0
-import QtPositioning 5.0
-import QtLocation 5.0
+import QtPositioning 5.2
+//import QtLocation 5.0
 
 import "Logic.js" as Logic
 Page {
@@ -78,6 +78,7 @@ Page {
             } else {
                 _distance = Math.round(_distance/1000) + ' km'
             }
+            map.toCoordinate(positionSource.position.coordinate)
             distance.title = _distance;
         }
     }
@@ -123,19 +124,13 @@ Page {
                 required.mapping: Plugin.AnyMappingFeatures
                 required.geocoding: Plugin.AnyGeocodingFeatures
                 parameters: [
-                    PluginParameter { name: "app_id"; value: "yZsDfXKfb8SGn0pWvAcO" },
+                    /*PluginParameter { name: "app_id"; value: "yZsDfXKfb8SGn0pWvAcO" },
                     PluginParameter { name: "token"; value: "9baoOsnPGb1s-BSbQzQ_JQ" },
-                    PluginParameter { name: "proxy"; value: "system"}
+                    PluginParameter { name: "proxy"; value: "system"}*/
                 ]
-                //
-                //center: QtLocation.coordinate(longitude, latitude)
             }
+            center: QtPositioning.coordinate(longitude, latitude)
             zoomLevel: 6
-            center {
-                    // The Qt Company in Oslo
-                    latitude: latitude
-                    longitude: longitude
-                }
         }
 
         SilicaFlickable {
