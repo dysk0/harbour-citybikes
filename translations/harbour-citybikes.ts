@@ -48,22 +48,25 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="Free Bike">
-        <location filename="../qml/pages/Station.qml" line="209"/>
+
+        <location filename="../qml/pages/Station.qml" line="190"/>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
     <message id="Free Bikes">
-        <location filename="../qml/pages/Station.qml" line="209"/>
+
+        <location filename="../qml/pages/Station.qml" line="190"/>
+
         <source></source>
         <translation type="unfinished"></translation>
     </message>
     <message id="Empty slots">
-        <location filename="../qml/pages/Station.qml" line="216"/>
+        <location filename="../qml/pages/Station.qml" line="197"/>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
     <message id="Far away">
-        <location filename="../qml/pages/Station.qml" line="225"/>
+        <location filename="../qml/pages/Station.qml" line="206"/>
         <source></source>
         <translation type="unfinished"></translation>
     </message>
