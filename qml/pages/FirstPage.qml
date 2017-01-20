@@ -47,6 +47,7 @@ Page {
         id: myWorker
         source: "../worker.js"
         onMessage: {
+            console.log("|aaa|"+JSON.stringify(Qt.locale().name))
             console.log(messageObject.reply)
             if (messageObject.reply == "modelUpdate"){
                 rawModel.update()
@@ -219,15 +220,13 @@ Page {
                 }
             }
             MenuItem {
-                //% About
-                text: qsTrId("About")
+                text: qsTr("About")
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"), data)
                 }
             }
 
             MenuItem {
-                //% Refresh
                 text: qsTr("Refresh")
                 onClicked: {
                     getConf()
@@ -235,7 +234,7 @@ Page {
             }
 
             MenuItem {
-                text: (searchField.visible ? qsTrId("Hide search") : qsTrId("Show search"))
+                text: (searchField.visible ? qsTr("Hide search") : qsTr("Show search"))
                 onClicked: {
                     searchField.visible = !searchField.visible
                     if (!searchField.visible){
@@ -250,8 +249,8 @@ Page {
         //section.delegate: sectionDelegate
         ViewPlaceholder {
             enabled: searchField.visible && filteredModel.count == 0
-            text: qsTrId("No results found!")
-            hintText: qsTrId("Please change your inquiry")
+            text: qsTr("No results found!")
+            hintText: qsTr("Please change your inquiry")
         }
 
 
@@ -308,7 +307,7 @@ Page {
         anchors.bottom: parent.bottom
         visible: (rawModel.count == 0) && showHints
         Behavior on opacity { FadeAnimation { duration: 1000 } }
-        text: "Flick left to select default location"
+        text: qsTr("Flick left to select default location")
     }
     TouchInteractionHint {
         id: horizontalFlick

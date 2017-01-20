@@ -6,22 +6,22 @@
     <message>
         <location filename="../qml/pages/Categories.qml" line="60"/>
         <source>Networks</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseaux</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez patienter...</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun résultat!</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="161"/>
         <source>Loading networks to display</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement des réseaux à afficher</translation>
     </message>
 </context>
 <context>
@@ -29,42 +29,42 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
-        <translation>Remove default location</translation>
+        <translation>Supprimer l&apos;emplacement par défaut</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="223"/>
         <source>About</source>
-        <translation>About App</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="230"/>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Rafraîchir</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Hide search</source>
-        <translation type="unfinished"></translation>
+        <translation>Masquer la barre de recherche</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Show search</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la barre de recherche</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun résultat!</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="253"/>
         <source>Please change your inquiry</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez modifier votre demande</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="310"/>
         <source>Flick left to select default location</source>
-        <translation type="unfinished"></translation>
+        <translation>Flick gauche pour sélectionner l&apos;emplacement par défaut</translation>
     </message>
 </context>
 <context>
@@ -72,22 +72,22 @@
     <message>
         <location filename="../qml/pages/Station.qml" line="197"/>
         <source>Free Bike</source>
-        <translation type="unfinished"></translation>
+        <translation>Vélo disponible</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="197"/>
         <source>Free Bikes</source>
-        <translation type="unfinished"></translation>
+        <translation>Vélos disponibles</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="204"/>
         <source>Empty slots</source>
-        <translation type="unfinished"></translation>
+        <translation>Places libres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="213"/>
         <source>Far away</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance</translation>
     </message>
 </context>
 </TS>

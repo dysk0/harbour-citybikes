@@ -59,7 +59,7 @@ CoverBackground {
         function update() {
 
             var filteredData = [];
-            for (var index = 0; index < (rawModel.count > 4 ? 4 : rawModel.count); index++) {
+            for (var index = 0; index < (rawModel.count > 4 ? 5 : rawModel.count); index++) {
                 var item = rawModel.get(index);
                 if (item.favourited){
                     filteredData.push(item)
@@ -81,7 +81,15 @@ CoverBackground {
             }
         }
     }
-
+    Label {
+        visible: !filteredModel.count
+        x: Theme.paddingLarge
+        y: parent.height - Theme.paddingLarge - height
+        text: "City Bikes"
+        font.pixelSize: Theme.fontSizeLarge
+        color: Theme.highlightColor
+        truncationMode: TruncationMode.Fade
+    }
     SilicaListView {
         model: filteredModel
         anchors{
@@ -90,11 +98,6 @@ CoverBackground {
             bottomMargin: Theme.paddingLarge
             leftMargin: Theme.paddingSmall
             rightMargin: Theme.paddingLarge
-        }
-        ViewPlaceholder {
-            enabled: rawModel.count > 0 && filteredModel.count == 0
-            text: qsTrId("No favourites")
-            hintText: qsTrId("Please change your inquiry")
         }
         delegate: Item {
             width: parent.width

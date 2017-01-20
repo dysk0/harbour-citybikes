@@ -57,7 +57,7 @@ Page {
         width: searchPage.width
 
         PageHeader {
-            title: "Networks"
+            title: qsTr("Networks")
         }
 
         SearchField {
@@ -157,8 +157,8 @@ Page {
 
             ViewPlaceholder {
                 enabled: listModel.count == 0
-                text: rawModel.count==0 ? qsTrId("Please wait...") : qsTrId("No results found!")
-                hintText: rawModel.count==0 ? qsTrId("Loading networks to display") : qsTrId("Please change your inquiry")
+                text: rawModel.count==0 ? qsTr("Please wait...") : qsTr("No results found!")
+                hintText: rawModel.count==0 ? qsTr("Loading networks to display") : ("Please change your inquiry")
             }
 
             section {

@@ -52,12 +52,9 @@ Page {
     property ListModel settings;
 
     Component.onCompleted: {
-        console.log("mjau mjua mjau "+settings.get(0).favourites)
-        console.log(settings.get(0).favourites)
         favourites = [];
         if (settings.get(0).favourites){
             favourites = settings.get(0).favourites.split(',');
-            console.log("no favs at all.")
         }
     }
 
@@ -197,14 +194,14 @@ Page {
                         width: parent.width/2-Theme.paddingLarge/2
                         height: Theme.itemSizeExtraLarge
                         title: free_bikes
-                        description: free_bikes == 1 ? qsTrId("Free Bike") : qsTrId("Free Bikes")
+                        description: free_bikes == 1 ? qsTr("Free Bike") : qsTr("Free Bikes")
                     }
 
                     CmpDisplayElement {
                         width: smComp.width
                         height: smComp.height
                         title: empty_slots
-                        description: qsTrId("Empty slots")
+                        description: qsTr("Empty slots")
                     }
 
                 }
@@ -213,7 +210,7 @@ Page {
                     width: parent.width
                     height: smComp.height
                     title:  '∞'
-                    description: qsTrId("Far away")
+                    description: qsTr("Far away")
                 }
 
                 Button {

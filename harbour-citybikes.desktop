@@ -4,6 +4,7 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-citybikes
 Exec=harbour-citybikes
 Name=City Bikes
+Name[fr]=TEST
 # translation example:
 # your app name in German locale (de)
 #

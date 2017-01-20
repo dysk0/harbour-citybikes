@@ -23,6 +23,15 @@ OTHER_FILES += qml/harbour-citybikes.qml \
     rpm/harbour-citybikes.spec \
     rpm/harbour-citybikes.yaml \
     translations/*.ts \
+    qml/pages/Categories.qml \
+    qml/pages/JSONListModel.qml \
+    qml/pages/jsonpath.js \
+    qml/pages/Logic.js \
+    qml/pages/Station.qml \
+    qml/pages/MyGridDelegate.qml \
+    qml/pages/CmpDisplayElement.qml \
+    qml/worker.js \
+    qml/pages/AboutPage.qml\
     harbour-citybikes.desktop
 
 
@@ -37,19 +46,7 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
+TRANSLATIONS += translations/harbour-citybikes-c.ts
 
-TRANSLATIONS += translations/harbour-citybikes-fr.ts
 
-DISTFILES += \
-    qml/pages/Categories.qml \
-    qml/pages/JSONListModel.qml \
-    qml/pages/jsonpath.js \
-    qml/pages/Logic.js \
-    qml/pages/Station.qml \
-    qml/pages/MyGridDelegate.qml \
-    qml/pages/CmpDisplayElement.qml \
-    qml/worker.js \
-    qml/pages/AboutPage.qml
-
-HEADERS +=
 
