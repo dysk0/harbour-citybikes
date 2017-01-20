@@ -59,7 +59,7 @@ CoverBackground {
         function update() {
 
             var filteredData = [];
-            for (var index = 0; index < rawModel.count; index++) {
+            for (var index = 0; index < (rawModel.count > 4 ? 4 : rawModel.count); index++) {
                 var item = rawModel.get(index);
                 if (item.favourited){
                     filteredData.push(item)
@@ -110,7 +110,6 @@ CoverBackground {
             Column {
                 width: parent.width
                 anchors {
-                    left: rect.right + Theme.paddingSmall
                     verticalCenter: parent.verticalCenter
                 }
 

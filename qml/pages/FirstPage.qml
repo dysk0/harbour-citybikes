@@ -205,9 +205,7 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
-                //: Pull menu item for list reload
-                //% Refresh
-                text: qsTrId("Remove default location")
+                text: qsTr("Remove default location")
                 onClicked: {
                     showHints = true;
                     Logic.conf = {}
@@ -230,15 +228,13 @@ Page {
 
             MenuItem {
                 //% Refresh
-                text: qsTrId("Refresh")
+                text: qsTr("Refresh")
                 onClicked: {
                     getConf()
                 }
             }
 
             MenuItem {
-                //: Pull menu item for list Search
-                //% Search
                 text: (searchField.visible ? qsTrId("Hide search") : qsTrId("Show search"))
                 onClicked: {
                     searchField.visible = !searchField.visible
