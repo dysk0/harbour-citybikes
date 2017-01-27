@@ -33,6 +33,7 @@ import Sailfish.Silica 1.0
 import "../pages/Logic.js" as Logic
 
 CoverBackground {
+    property int coverIndex: 0
     WorkerScript {
         id: myWorker
         source: "../worker.js"
@@ -59,7 +60,7 @@ CoverBackground {
         function update() {
 
             var filteredData = [];
-            for (var index = 0; index < (rawModel.count > 4 ? 5 : rawModel.count); index++) {
+            for (var index = 0; index < rawModel.count; index++) {
                 var item = rawModel.get(index);
                 if (item.favourited){
                     filteredData.push(item)
@@ -90,15 +91,32 @@ CoverBackground {
         color: Theme.highlightColor
         truncationMode: TruncationMode.Fade
     }
-    SilicaListView {
-        model: filteredModel
-        anchors{
-            fill: parent
-            topMargin: Theme.paddingLarge
-            bottomMargin: Theme.paddingLarge
-            leftMargin: Theme.paddingSmall
-            rightMargin: Theme.paddingLarge
+
+    Timer {
+        interval: 1500; running: true; repeat: true
+        onTriggered: {
+
+            list.positionViewAtIndex(coverIndex, ListView.Beginning)
+            if (coverIndex <= filteredModel.count)
+                coverIndex++
+            else
+                coverIndex = 0
         }
+    }
+
+    SilicaListView {
+        id: list
+        remove: Transition {
+            ParallelAnimation {
+                NumberAnimation { property: "opacity"; to: 0; duration: 100 }
+                NumberAnimation { properties: "y"; to: -100; duration: 500 }
+            }
+        }
+        model: filteredModel
+        anchors {
+            fill: parent
+        }
+
         delegate: Item {
             width: parent.width
             height: Theme.itemSizeSmall
