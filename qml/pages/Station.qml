@@ -35,6 +35,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtWebKit 3.0
+import QtWebKit.experimental 1.0
 import QtPositioning 5.2
 import "Logic.js" as Logic
 Page {
@@ -50,6 +51,7 @@ Page {
     property string city: ''
     property variant favourites;
     property ListModel settings;
+    property ListModel listModel;
 
     Component.onCompleted: {
         favourites = [];
@@ -130,12 +132,22 @@ Page {
                 right: parent.right
             }
             onLoadingChanged: {
-                if (loadRequest.status == WebView.LoadSucceededStatus)
+                if (loadRequest.status == WebView.LoadSucceededStatus){
+                    drawer.open = true
+                    wv.experimental.evaluateJavaScript('markers = []');
+                    for(var i = 0; i < listModel.count; i++){
+                        console.log(listModel.get(i).longitude);
+                        if (listModel.get(i).id !== stationId)
+                            wv.experimental.evaluateJavaScript('markers.push(['+listModel.get(i).latitude+', '+listModel.get(i).longitude+']);')
+                    }
+                    wv.experimental.evaluateJavaScript('processMarkers()');
+                }
                 drawer.open = true
             }
+            onUrlChanged: {
+                console.log(wv.url);
 
-            Component.onCompleted: {
-
+                //wv.experimental.evaluateJavaScript('document.write("<h1>AAAAAAAA</h1>")')
 
             }
         }

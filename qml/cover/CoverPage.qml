@@ -70,7 +70,7 @@ CoverBackground {
             while (count > filteredData.length) {
                 remove(filteredData.length)
             }
-            for (index = 0; index < filteredData.length; index++) {
+            for (index = 0; index < (filteredData.length > 4 ? 4 : filteredData.length); index++) {
                 if (index < count) {
                     setProperty(index, "id", filteredData[index].id)
                     setProperty(index, "name", filteredData[index].name)
@@ -92,7 +92,7 @@ CoverBackground {
         truncationMode: TruncationMode.Fade
     }
 
-    Timer {
+   /* Timer {
         interval: 1500; running: true; repeat: true
         onTriggered: {
 
@@ -102,7 +102,7 @@ CoverBackground {
             else
                 coverIndex = 0
         }
-    }
+    }*/
 
     SilicaListView {
         id: list
@@ -115,6 +115,8 @@ CoverBackground {
         model: filteredModel
         anchors {
             fill: parent
+            topMargin: Theme.paddingLarge
+            leftMargin: Theme.paddingSmall
         }
 
         delegate: Item {

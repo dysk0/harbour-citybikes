@@ -287,7 +287,8 @@ Page {
                     latitude: latitude,
                     longitude: longitude,
                     timestamp: timestamp,
-                    settings: settings
+                    settings: settings,
+                    listModel: filteredModel
                 }
                 pageStack.push(Qt.resolvedUrl("Station.qml"), data)
             }

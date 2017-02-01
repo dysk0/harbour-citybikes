@@ -62,7 +62,7 @@
         <translation>Veuillez modifier votre demande</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="310"/>
+        <location filename="../qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
         <translation>Flick gauche pour sélectionner l&apos;emplacement par défaut</translation>
     </message>
@@ -70,22 +70,22 @@
 <context>
     <name>Station</name>
     <message>
-        <location filename="../qml/pages/Station.qml" line="197"/>
+        <location filename="../qml/pages/Station.qml" line="209"/>
         <source>Free Bike</source>
         <translation>Vélo disponible</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="197"/>
+        <location filename="../qml/pages/Station.qml" line="209"/>
         <source>Free Bikes</source>
         <translation>Vélos disponibles</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="204"/>
+        <location filename="../qml/pages/Station.qml" line="216"/>
         <source>Empty slots</source>
         <translation>Places libres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="213"/>
+        <location filename="../qml/pages/Station.qml" line="225"/>
         <source>Far away</source>
         <translation>Distance</translation>
     </message>
