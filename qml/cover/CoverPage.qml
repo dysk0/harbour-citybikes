@@ -33,7 +33,14 @@ import Sailfish.Silica 1.0
 import "../pages/Logic.js" as Logic
 
 CoverBackground {
-    property int coverIndex: 0
+    property int coverIndex: 3
+    property bool shouldAnimate: false
+    onShouldAnimateChanged: {
+        console.log(shouldAnimate)
+        updateTimer.running = shouldAnimate
+    }
+
+
     WorkerScript {
         id: myWorker
         source: "../worker.js"
@@ -52,13 +59,17 @@ CoverBackground {
     ListModel {
         id: rawModel
         function update() {
+            displayModel.clear()
             filteredModel.update()
         }
     }
     ListModel {
+        id: displayModel
+    }
+    ListModel {
         id: filteredModel
         function update() {
-
+            clear();
             var filteredData = [];
             for (var index = 0; index < rawModel.count; index++) {
                 var item = rawModel.get(index);
@@ -70,54 +81,79 @@ CoverBackground {
             while (count > filteredData.length) {
                 remove(filteredData.length)
             }
-            for (index = 0; index < (filteredData.length > 4 ? 4 : filteredData.length); index++) {
-                if (index < count) {
-                    setProperty(index, "id", filteredData[index].id)
-                    setProperty(index, "name", filteredData[index].name)
-                    setProperty(index, "empty_slots", filteredData[index].empty_slots)
-                    setProperty(index, "free_bikes", filteredData[index].free_bikes)
-                } else {
-                    append(filteredData[index])
-                }
+            for (index = 0; index < filteredData.length; index++) {
+                append(filteredData[index])
             }
+            for (index = 0; index < filteredData.length; index++) {
+                if (index < 3)
+                    displayModel.append(filteredData[index])
+                append(filteredData[index])
+            }
+            if (filteredData.length > 3){
+                console.log(filteredData.length )
+                shouldAnimate = true;
+            } else{
+                shouldAnimate = false;}
         }
     }
     Label {
-        visible: !filteredModel.count
-        x: Theme.paddingLarge
-        y: parent.height - Theme.paddingLarge - height
+        visible: true
+        width: parent.width-2*Theme.paddingMedium
+        x: Theme.paddingMedium
+        y: parent.height - Theme.paddingMedium - height
         text: "City Bikes"
-        font.pixelSize: Theme.fontSizeLarge
+        font.pixelSize: Theme.fontSizeMedium
+        horizontalAlignment : Text.AlignRight
         color: Theme.highlightColor
         truncationMode: TruncationMode.Fade
     }
 
-   /* Timer {
-        interval: 1500; running: true; repeat: true
-        onTriggered: {
 
-            list.positionViewAtIndex(coverIndex, ListView.Beginning)
-            if (coverIndex <= filteredModel.count)
+
+    Timer {
+        id: updateTimer
+        interval: 4000;
+        running: shouldAnimate;
+        repeat: true
+        onTriggered: {
+            if (coverIndex < filteredModel.count-1){
                 coverIndex++
-            else
+            } else {
                 coverIndex = 0
+            }
+            if (displayModel.count > 2){
+                displayModel.remove(0)
+            }
+            displayModel.append(filteredModel.get(coverIndex))
+
+            //list.positionViewAtIndex(coverIndex, ListView.Beginning)
+
         }
-    }*/
+    }
 
     SilicaListView {
         id: list
-        remove: Transition {
-            ParallelAnimation {
-                NumberAnimation { property: "opacity"; to: 0; duration: 100 }
-                NumberAnimation { properties: "y"; to: -100; duration: 500 }
-            }
+        clip: true
+        width: parent.width
+        height: Theme.itemSizeSmall*3
+        x: Theme.paddingSmall
+        y: Theme.paddingLarge
+        //anchors.bottom: parent.bottom
+        //anchors.bottomMargin: 10
+        snapMode: ListView.SnapToItem
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        highlightFollowsCurrentItem: true
+
+        add: Transition {
+            NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 800 }
+            NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 800 }
         }
-        model: filteredModel
-        anchors {
-            fill: parent
-            topMargin: Theme.paddingLarge
-            leftMargin: Theme.paddingSmall
+
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: 800; easing.type: Easing.InOutBack }
         }
+        model: displayModel
+
 
         delegate: Item {
             width: parent.width
@@ -157,8 +193,11 @@ CoverBackground {
         }
     }
     onStatusChanged: {
+        shouldAnimate = false;
         if (status === PageStatus.Active) {
             myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': Logic.conf})
         }
+        if (filteredModel.count < 4)
+            shouldAnimate = false;
     }
 }

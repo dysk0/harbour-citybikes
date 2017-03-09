@@ -4,22 +4,22 @@
 <context>
     <name>Categories</name>
     <message>
-        <location filename="../qml/pages/Categories.qml" line="60"/>
+        <location filename="qml/pages/Categories.qml" line="60"/>
         <source>Networks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Categories.qml" line="160"/>
+        <location filename="qml/pages/Categories.qml" line="160"/>
         <source>Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Categories.qml" line="160"/>
+        <location filename="qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Categories.qml" line="161"/>
+        <location filename="qml/pages/Categories.qml" line="161"/>
         <source>Loading networks to display</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27,42 +27,42 @@
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="209"/>
+        <location filename="qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="223"/>
+        <location filename="qml/pages/FirstPage.qml" line="223"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="230"/>
+        <location filename="qml/pages/FirstPage.qml" line="230"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="237"/>
+        <location filename="qml/pages/FirstPage.qml" line="237"/>
         <source>Hide search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="237"/>
+        <location filename="qml/pages/FirstPage.qml" line="237"/>
         <source>Show search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="252"/>
+        <location filename="qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="253"/>
+        <location filename="qml/pages/FirstPage.qml" line="253"/>
         <source>Please change your inquiry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="311"/>
+        <location filename="qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,22 +70,22 @@
 <context>
     <name>Station</name>
     <message>
-        <location filename="../qml/pages/Station.qml" line="198"/>
+        <location filename="qml/pages/Station.qml" line="209"/>
         <source>Free Bike</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="198"/>
+        <location filename="qml/pages/Station.qml" line="209"/>
         <source>Free Bikes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="205"/>
+        <location filename="qml/pages/Station.qml" line="216"/>
         <source>Empty slots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/Station.qml" line="214"/>
+        <location filename="qml/pages/Station.qml" line="225"/>
         <source>Far away</source>
         <translation type="unfinished"></translation>
     </message>
