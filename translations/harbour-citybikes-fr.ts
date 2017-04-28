@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
-        <translation>Aucun résultat!</translation>
+        <translation>Aucun résultat !</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="161"/>
@@ -29,7 +29,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
-        <translation>Supprimer l&apos;emplacement par défaut</translation>
+        <translation>Supprimer l'emplacement par défaut</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="223"/>
@@ -54,7 +54,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
-        <translation>Aucun résultat!</translation>
+        <translation>Aucun résultat !</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="253"/>
@@ -64,7 +64,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
-        <translation>Flick gauche pour sélectionner l&apos;emplacement par défaut</translation>
+        <translation>Glissez à gauche pour sélectionner l'emplacement par défaut</translation>
     </message>
 </context>
 <context>
