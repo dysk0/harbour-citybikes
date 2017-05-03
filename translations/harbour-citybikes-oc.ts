@@ -6,22 +6,22 @@
     <message>
         <location filename="../qml/pages/Categories.qml" line="60"/>
         <source>Networks</source>
-        <translation>Réseaux</translation>
+        <translation>Malhums</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>Please wait...</source>
-        <translation>Veuillez patienter...</translation>
+        <translation>Mercés d'esperar...</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
-        <translation>Aucun résultat!</translation>
+        <translation>Pas cap de resultat !</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="161"/>
         <source>Loading networks to display</source>
-        <translation>Chargement des réseaux à afficher</translation>
+        <translation>Cargament dels malhums per afichar</translation>
     </message>
 </context>
 <context>
@@ -29,42 +29,42 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
-        <translation>Supprimer l&apos;emplacement par défaut</translation>
+        <translation>Suprimir l'emplaçament per defaut</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="223"/>
         <source>About</source>
-        <translation>À propos</translation>
+        <translation>A prepaus</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="230"/>
         <source>Refresh</source>
-        <translation>Rafraîchir</translation>
+        <translation>Tornar cargar</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Hide search</source>
-        <translation>Masquer la barre de recherche</translation>
+        <translation>Rescondre la barra de recèrca</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Show search</source>
-        <translation>Afficher la barre de recherche</translation>
+        <translation>Mostrar la barra de recèrca</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
-        <translation>Aucun résultat!</translation>
+        <translation>Pas cap de resultat !</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="253"/>
         <source>Please change your inquiry</source>
-        <translation>Veuillez modifier votre demande</translation>
+        <translation>Mercés de modificar vòstra demanda</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
-        <translation>Flick gauche pour sélectionner l&apos;emplacement par défaut</translation>
+        <translation>Lisatz a esquèrra per causir l'emplaçament per defaut</translation>
     </message>
 </context>
 <context>
@@ -72,22 +72,22 @@
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bike</source>
-        <translation>Vélo disponible</translation>
+        <translation>Bicicleta disponibla</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bikes</source>
-        <translation>Vélos disponibles</translation>
+        <translation>Bicicletas disponiblas</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="205"/>
         <source>Empty slots</source>
-        <translation>Places libres</translation>
+        <translation>Plaças liuras</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="214"/>
         <source>Far away</source>
-        <translation>Distance</translation>
+        <translation>Distància</translation>
     </message>
 </context>
 </TS>
