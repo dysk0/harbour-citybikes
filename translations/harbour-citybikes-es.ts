@@ -72,17 +72,17 @@
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bike</source>
-        <translation>Bici disponible</translation>
+        <translation>Bici libre</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bikes</source>
-        <translation>Bicis disponibles</translation>
+        <translation>Bicis libres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="205"/>
         <source>Empty slots</source>
-        <translation>Bornetas disponibles</translation>
+        <translation>Bornetas libres</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="214"/>
