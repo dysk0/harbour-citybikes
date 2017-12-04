@@ -53,6 +53,12 @@ Page {
                     anchors.right: parent.right; anchors.rightMargin: Theme.paddingLarge
                     text: "Credits"
                 }
+
+                Button {
+                    text: "Translate App"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    onClicked: Qt.openUrlExternally("https://www.transifex.com/dysko/citybikes/translate/")
+                }
                 Button {
                     text: "Twitter"
                     anchors.horizontalCenter: parent.horizontalCenter

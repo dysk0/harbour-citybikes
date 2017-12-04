@@ -19,7 +19,7 @@ SOURCES += src/harbour-citybikes.cpp
 OTHER_FILES += qml/harbour-citybikes.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    rpm/harbour-citybikes.changes.in \
+    rpm/harbour-citybikes.changes \
     rpm/harbour-citybikes.spec \
     rpm/harbour-citybikes.yaml \
     translations/*.ts \

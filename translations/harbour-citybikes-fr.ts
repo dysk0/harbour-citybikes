@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="fr" version="2.1">
 <context>
     <name>Categories</name>
     <message>
@@ -16,7 +14,7 @@
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
-        <translation>Aucun résultat !</translation>
+        <translation>Aucun résultat!</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="161"/>
@@ -29,7 +27,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
-        <translation>Supprimer l'emplacement par défaut</translation>
+        <translation>Supprimer l&apos;emplacement par défaut</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="223"/>
@@ -54,7 +52,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
-        <translation>Aucun résultat !</translation>
+        <translation>Aucun résultat!</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="253"/>
@@ -64,7 +62,7 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
-        <translation>Glissez à gauche pour sélectionner l'emplacement par défaut</translation>
+        <translation>Glissez à gauche pour sélectionner l&apos;emplacement par défaut</translation>
     </message>
 </context>
 <context>
