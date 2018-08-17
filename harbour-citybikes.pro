@@ -47,7 +47,15 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS = translations/harbour-citybikes.ts
-TRANSLATIONS += translations/harbour-citybikes-c.ts
+TRANSLATIONS += translations/harbour-citybikes_c.ts
+TRANSLATIONS += translations/harbour-citybikes_es.ts
+TRANSLATIONS += translations/harbour-citybikes_fr.ts
+TRANSLATIONS += translations/harbour-citybikes_it.ts
+TRANSLATIONS += translations/harbour-citybikes_nl_BE.ts
+TRANSLATIONS += translations/harbour-citybikes_nl.ts
+TRANSLATIONS += translations/harbour-citybikes_oc.ts
+TRANSLATIONS += translations/harbour-citybikes_ru.ts
+
 
 
 

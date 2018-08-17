@@ -65,7 +65,7 @@ Page {
 
         myWorker.sendMessage({ 'model': rawModel, 'action': 'fetchStations', 'cnf': Logic.conf})
         horizontalFlick.stop()
-        if (!Logic.conf.href || Logic.conf.href == ""){
+        if (!Logic.conf.href || Logic.conf.href === ""){
             console.log("no previous conf!")
             indicator.running = false;
             horizontalFlick.direction = TouchInteraction.Left

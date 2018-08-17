@@ -1,25 +1,27 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="es" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="nl_BE">
 <context>
     <name>Categories</name>
     <message>
         <location filename="../qml/pages/Categories.qml" line="60"/>
         <source>Networks</source>
-        <translation>Redes</translation>
+        <translation>Netwerken</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>Please wait...</source>
-        <translation>Por favor, espera...</translation>
+        <translation>Even geduld…</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="160"/>
         <source>No results found!</source>
-        <translation>¡No hay resultados!</translation>
+        <translation>Geen resultaten gevonden!</translation>
     </message>
     <message>
         <location filename="../qml/pages/Categories.qml" line="161"/>
         <source>Loading networks to display</source>
-        <translation>Cargando redes que mostrar</translation>
+        <translation>Laden van netwerken voor weer te geven</translation>
     </message>
 </context>
 <context>
@@ -27,42 +29,42 @@
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="209"/>
         <source>Remove default location</source>
-        <translation>Borrar ubicación predeterminada</translation>
+        <translation>Standaardlocatie verwijderen</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="223"/>
         <source>About</source>
-        <translation>Acerca de</translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="230"/>
         <source>Refresh</source>
-        <translation>Actualizar</translation>
+        <translation>Vernieuwen</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Hide search</source>
-        <translation>Ocultar campo búsqueda</translation>
+        <translation>Zoekregel verbergen</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="237"/>
         <source>Show search</source>
-        <translation>Mostrar campo búsqueda</translation>
+        <translation>Zoekregel weergeven</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="252"/>
         <source>No results found!</source>
-        <translation>¡No hay resultados!</translation>
+        <translation>Geen resultaten gevonden!</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="253"/>
         <source>Please change your inquiry</source>
-        <translation>Por favor, cambia tu consulta</translation>
+        <translation>Wijzigt uw zoekopdracht</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="311"/>
         <source>Flick left to select default location</source>
-        <translation>Desliza hacia la izquierda para seleccionar ubicación predeterminada</translation>
+        <translation>Veegt naar links voor de standaardlocatie te selecteren</translation>
     </message>
 </context>
 <context>
@@ -70,22 +72,22 @@
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bike</source>
-        <translation>Bici libre</translation>
+        <translation>Vrije velo</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="198"/>
         <source>Free Bikes</source>
-        <translation>Bicis libres</translation>
+        <translation>Vrije velo’s</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="205"/>
         <source>Empty slots</source>
-        <translation>Bornetas libres</translation>
+        <translation>Lege slots</translation>
     </message>
     <message>
         <location filename="../qml/pages/Station.qml" line="214"/>
         <source>Far away</source>
-        <translation>Distancia</translation>
+        <translation>Afstand</translation>
     </message>
 </context>
 </TS>
