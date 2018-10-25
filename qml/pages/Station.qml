@@ -77,7 +77,7 @@ Page {
             var _distance = currentPosition.distanceTo(fromCoordinate)
             //console.log("distance:" + _distance)
             if (_distance < 1000){
-                _distance = _distance + ' m'
+                _distance = Math.round(_distance) + ' m'
             } else {
                 _distance = Math.round(_distance/1000) + ' km'
             }

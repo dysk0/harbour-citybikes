@@ -49,7 +49,7 @@ Page {
         onMessage: {
             console.log("|aaa|"+JSON.stringify(Qt.locale().name))
             console.log(messageObject.reply)
-            if (messageObject.reply == "modelUpdate"){
+            if (messageObject && messageObject.reply === "modelUpdate"){
                 rawModel.update()
             }
 

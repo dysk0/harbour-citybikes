@@ -1,12 +1,6 @@
-# Rename this file as harbour-citybikes.changes to include changelog
-# entries in your RPM file.
-#
-# Add new changelog entries following the format below.
-# Add newest entries to the top of the list.
-# Separate entries from eachother with a blank line.
-
-# * date Author's Name <author's email> version-release
-# - Summary of changes
+* Thu Oct 25 2018 Duško Angirević <dysko@me.com> 0.2.8-0
+- Minor bug fix related to the distance displaying
+- Fixed language support and updating language files
 
 * Fri Aug 17 2018 Duško Angirević <dysko@me.com> 0.2.7-0
 - Updated languages

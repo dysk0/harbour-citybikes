@@ -16,27 +16,19 @@ CONFIG += sailfishapp
 
 SOURCES += src/harbour-citybikes.cpp
 
-OTHER_FILES += qml/harbour-citybikes.qml \
+DISTFILES += qml/harbour-citybikes.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
+    qml/pages/SecondPage.qml \
     rpm/harbour-citybikes.changes \
+    rpm/harbour-citybikes.changes.run.in \
     rpm/harbour-citybikes.spec \
     rpm/harbour-citybikes.yaml \
     translations/*.ts \
-    qml/pages/Categories.qml \
-    qml/pages/JSONListModel.qml \
-    qml/pages/jsonpath.js \
-    qml/pages/Logic.js \
-    qml/pages/Station.qml \
-    qml/pages/MyGridDelegate.qml \
-    qml/pages/CmpDisplayElement.qml \
-    qml/worker.js \
-    qml/pages/AboutPage.qml\
-    harbour-citybikes.desktop
+    harbour-citybikes.desktop \
+    rpm/harbour-citybikes.changes
 
-
-
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 172x172
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -46,17 +38,11 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS = translations/harbour-citybikes.ts
-TRANSLATIONS += translations/harbour-citybikes_c.ts
-TRANSLATIONS += translations/harbour-citybikes_es.ts
-TRANSLATIONS += translations/harbour-citybikes_fr.ts
-TRANSLATIONS += translations/harbour-citybikes_it.ts
-TRANSLATIONS += translations/harbour-citybikes_nl_BE.ts
-TRANSLATIONS += translations/harbour-citybikes_nl.ts
-TRANSLATIONS += translations/harbour-citybikes_oc.ts
-TRANSLATIONS += translations/harbour-citybikes_ru.ts
-
-
-
-
-
+TRANSLATIONS += translations/harbour-citybikes-de.ts
+TRANSLATIONS += translations/harbour-citybikes-es.ts
+TRANSLATIONS += translations/harbour-citybikes-fr.ts
+TRANSLATIONS += translations/harbour-citybikes-it.ts
+TRANSLATIONS += translations/harbour-citybikes-nl.ts
+TRANSLATIONS += translations/harbour-citybikes-bl_BE.ts
+TRANSLATIONS += translations/harbour-citybikes-oc.ts
+TRANSLATIONS += translations/harbour-citybikes-ru.ts
